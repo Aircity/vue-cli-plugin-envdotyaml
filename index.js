@@ -11,11 +11,11 @@ function objectMap (object, mapFn) {
 module.exports = api => {
   api.chainWebpack(config => {
     const filename = api.resolve('env.yaml')
-    let env
-    if(fs.existsSync(filename)) {
-      env = Yaml.safeLoad(fs.readFileSync(filename, 'utf8'))
-    }
-    if (env && typeof env === 'object') {
+    if(!fs.existsSync(filename)) {
+      return false
+    }    
+    const env = Yaml.safeLoad(fs.readFileSync(filename, 'utf8'))
+    if(env && typeof env === 'object') {
       const loadEnv = objectMap(env, value => JSON.stringify(value))
       const getCurrentEnv = (args) => {
         args['process.env'] = { ...args['process.env'], ...loadEnv }

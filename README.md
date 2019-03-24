@@ -17,9 +17,6 @@ console.log(process.env.baseURL)
 // => http://example.com/
 ```
 
-
-```
-
 ## Getting started
 
 :warning: Make sure you have vue-cli 3.x.x:
